@@ -9,7 +9,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       Questions about an order, a scent, or a custom product? Send a message and we'll reply within a day or two.
     </p>
 
-    <form class="grid gap-5 bg-white rounded-[var(--radius-lg)] border border-[color:var(--color-secondary)] shadow-[var(--shadow-soft)] p-8">
+    <form id="contact-form" class="grid gap-5 bg-white rounded-[var(--radius-lg)] border border-[color:var(--color-secondary)] shadow-[var(--shadow-soft)] p-8">
+      <div class="hidden" aria-hidden="true">
+        <label for="website">Website</label>
+        <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+      </div>
       <div class="grid sm:grid-cols-2 gap-5">
         <div>
           <label class="block text-sm font-medium mb-1.5" for="name">Name</label>
@@ -27,14 +31,39 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <button type="submit" class="button-primary justify-self-start rounded-full px-7 py-3 text-sm font-semibold text-white" style="background:var(--color-primary);">
         Send Message
       </button>
-      <p class="text-xs text-[color:var(--color-muted)]">
-        Note: this form isn't wired to a backend yet. Connect it to a form service (e.g. Formspree, Cloudflare Workers, or an email API) before launch.
-      </p>
+      <p id="contact-status" class="text-sm" role="status" aria-live="polite"></p>
     </form>
 
-    <div class="mt-10 text-center text-sm text-[color:var(--color-muted)]">
-      Or email us directly at
-      <a href="mailto:hello@nadinekay.com" class="font-semibold" style="color:var(--color-primary-dark);">hello@nadinekay.com</a>
-    </div>
   </section>
 </BaseLayout>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('#contact-form');
+  const status = document.querySelector<HTMLElement>('#contact-status');
+  const button = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!status || !button) return;
+    button.disabled = true;
+    status.style.color = 'var(--color-muted)';
+    status.textContent = 'Sending...';
+    try {
+      const data = Object.fromEntries(new FormData(form));
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(result.error || 'Something went wrong. Please try again.');
+      form.reset();
+      status.style.color = 'var(--color-primary-dark)';
+      status.textContent = "Thank you! Your message has been sent. We'll reply within a day or two.";
+    } catch (error) {
+      status.style.color = '#b91c1c';
+      status.textContent = error instanceof Error ? error.message : 'Something went wrong. Please try again.';
+    } finally {
+      button.disabled = false;
+    }
+  });
+</script>

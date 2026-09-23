@@ -2,6 +2,7 @@ import authModule from '../modules/cloudflare-magic-link-auth/src/index.js';
 import catalogModule from '../modules/catalog-and-media-admin/src/index.js';
 import operationsModule from '../modules/operations-admin/src/index.js';
 import orderModule from '../modules/quote-to-order-workflow/src/index.js';
+import contactModule from '../modules/contact-form/src/index.js';
 
 const json = (body, status = 200) => Response.json(body, {
   status,
@@ -26,6 +27,10 @@ export default {
     if (pathname === '/api/health') {
       const bindings = requiredBindings(env);
       return json({ ok: bindings.database, bindings }, bindings.database ? 200 : 503);
+    }
+
+    if (pathname === '/api/contact') {
+      return contactModule.fetch(request, env, context);
     }
 
     if (pathname.startsWith('/api/auth/')) {
