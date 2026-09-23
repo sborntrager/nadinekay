@@ -7,7 +7,7 @@
     {
       "binding": "DB",
       "database_name": "nadine-kay",
-      "database_id": "f12185fd-2b2f-4e47-9957-9b0d66d41116"
+      "database_id": "76749149-0f00-47cf-8582-38e73b6d3af6"
     }
   ],
   "r2_buckets": [
@@ -17,13 +17,13 @@
     }
   ],
   "vars": {
-    "APP_ORIGIN": "https://nadine-kay.pages.dev",
+    "APP_ORIGIN": "https://nadine-kay-aew.pages.dev",
     "AUTH_SUCCESS_PATH": "/account",
     "ALLOW_SELF_SIGNUP": "true",
     "MAGIC_LINK_TTL_MINUTES": "15",
     "SESSION_TTL_DAYS": "30",
     "RESEND_FROM_EMAIL": "Nadine Kay <onboarding@resend.dev>",
-    "PUBLIC_MEDIA_BASE_URL": "https://nadine-kay.pages.dev/media",
+    "PUBLIC_MEDIA_BASE_URL": "https://nadine-kay-aew.pages.dev/media",
     "MAX_MEDIA_BYTES": "10485760"
   }
 }
