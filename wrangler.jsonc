@@ -22,7 +22,7 @@
     "ALLOW_SELF_SIGNUP": "true",
     "MAGIC_LINK_TTL_MINUTES": "15",
     "SESSION_TTL_DAYS": "30",
-    "RESEND_FROM_EMAIL": "Nadine Kay <onboarding@resend.dev>",
+    "RESEND_FROM_EMAIL": "Nadine Kay <login@nadinekay.com>",
     "PUBLIC_MEDIA_BASE_URL": "https://nadinekay.com/media",
     "MAX_MEDIA_BYTES": "10485760"
   }
