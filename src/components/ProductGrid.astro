@@ -1,0 +1,72 @@
+---
+import ProductCard from './ProductCard.astro';
+
+export const products = [
+  {
+    name: 'Signature Candles',
+    category: 'Candles',
+    price: 'Inquire',
+    description: 'Hand-poured candles made to fill your space with a beautiful signature scent.',
+    colors: ['#F6E0B8', '#D9A875'],
+  },
+  {
+    name: 'Fresh Home Carpet Seasoning',
+    category: 'Carpet Seasoning',
+    price: 'Inquire',
+    description: 'Scented carpet refresher to help give your home a clean, welcoming feel.',
+    colors: ['#C9B6F2', '#8E7DC6'],
+  },
+  {
+    name: 'Everyday Air Freshener',
+    category: 'Air Freshener',
+    price: 'Inquire',
+    description: 'A simple way to refresh rooms, linens, and everyday spaces with lovely fragrance.',
+    colors: ['#8FD9EC', '#3FA9C9'],
+  },
+  {
+    name: 'Bath Bomb Collection',
+    category: 'Bath Bombs',
+    price: 'Inquire',
+    description: 'Fizzy, skin-loving bath treats made for turning an ordinary bath into a ritual.',
+    colors: ['#F7B8CE', '#E9789F'],
+  },
+  {
+    name: 'Handmade Soaps',
+    category: 'Soaps',
+    price: 'Inquire',
+    description: 'Gentle handmade soaps with rich lather and inviting scents.',
+    colors: ['#B9E4D0', '#5FB893'],
+  },
+  {
+    name: 'Whipped Body Butter',
+    category: 'Body Butter',
+    price: 'Inquire',
+    description: 'Velvety moisture for soft, nourished skin from head to toe.',
+    colors: ['#FFD37A', '#F4A94A'],
+  },
+  {
+    name: 'Nourishing Body Scrub',
+    category: 'Body Scrub',
+    price: 'Inquire',
+    description: 'A creamy exfoliating scrub for smooth, silky-soft skin.',
+    colors: ['#EADFCB', '#C9A876'],
+  },
+  {
+    name: 'Nourishing Body Oil',
+    category: 'Body Oil',
+    price: 'Inquire',
+    description: 'Lightweight, nourishing oil that leaves skin feeling soft and moisturized.',
+    colors: ['#F4C6D6', '#D9A875'],
+  },
+  {
+    name: 'Glossy Lip Care',
+    category: 'Lip Gloss',
+    price: 'Inquire',
+    description: 'A smooth, glossy finish to keep your lips looking and feeling cared for.',
+    colors: ['#F7B8CE', '#D9A875'],
+  },
+];
+---
+<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+  {products.map((p) => <ProductCard {...p} />)}
+</div>

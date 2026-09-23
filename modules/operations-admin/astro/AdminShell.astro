@@ -1,0 +1,38 @@
+---
+const { active = "Overview", title = "Operations" } = Astro.props;
+const navigation = [
+  ["Overview", "/admin/"],
+  ["Content", "/admin/content/"],
+  ["Inbox", "/admin/inbox/"],
+  ["Mail", "/admin/mail/"],
+  ["Social", "/admin/social/"],
+];
+---
+
+<div class="min-h-screen bg-slate-950 text-slate-100">
+  <header class="border-b border-slate-800 bg-slate-900/80 px-5 py-4">
+    <div class="mx-auto flex max-w-7xl items-center justify-between">
+      <a href="/admin/" class="font-semibold tracking-tight">{title}</a>
+      <form method="post" action="/api/auth/logout">
+        <button class="text-sm text-slate-300 hover:text-white">Sign out</button>
+      </form>
+    </div>
+  </header>
+  <div class="mx-auto grid max-w-7xl md:grid-cols-[13rem_1fr]">
+    <nav class="border-b border-slate-800 px-3 py-4 md:min-h-[calc(100vh-65px)] md:border-b-0 md:border-r">
+      <ul class="flex gap-1 overflow-x-auto md:block md:space-y-1">
+        {navigation.map(([label, href]) => (
+          <li>
+            <a href={href} class:list={[
+              "block whitespace-nowrap rounded-md px-3 py-2 text-sm transition",
+              label === active ? "bg-sky-500 text-slate-950" : "text-slate-300 hover:bg-slate-800 hover:text-white",
+            ]}>{label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <main class="p-5 md:p-8">
+      <slot />
+    </main>
+  </div>
+</div>

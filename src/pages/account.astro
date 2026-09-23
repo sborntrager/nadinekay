@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="My Account | Nadine Kay" description="Sign in to view your Nadine Kay orders.">
+  <section class="min-h-[60vh] bg-[color:var(--color-surface)] px-6 py-16">
+    <div id="account-login" class="mx-auto max-w-md rounded-[var(--radius-lg)] border border-[color:var(--color-secondary)] bg-white p-8 shadow-[var(--shadow-soft)]">
+      <div class="text-center">
+        <img src="/logo.png" alt="Nadine Kay" class="mx-auto mb-4 h-20 w-20 object-contain" />
+        <h1 class="text-3xl font-semibold" style="font-family:var(--font-heading);">Your account</h1>
+        <p class="mt-3 text-sm leading-6 text-[color:var(--color-muted)]">Enter your email and we will send you a secure sign-in link.</p>
+      </div>
+      <form id="account-login-form" class="mt-7 space-y-4">
+        <div><label for="account-email" class="mb-2 block text-sm font-medium">Email address</label><input id="account-email" name="email" type="email" autocomplete="email" required class="w-full rounded-[var(--radius-sm)] border border-[color:var(--color-secondary)] px-4 py-3" /></div>
+        <p id="account-message" class="hidden rounded-[var(--radius-sm)] px-4 py-3 text-sm" role="status"></p>
+        <button type="submit" class="button-primary w-full rounded-full px-5 py-3 text-sm font-semibold text-white" style="background:var(--color-primary);">Email me a sign-in link</button>
+      </form>
+    </div>
+
+    <div id="account-dashboard" class="mx-auto hidden max-w-5xl">
+      <div class="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+        <div><p class="text-xs font-semibold uppercase tracking-[0.2em]" style="color:var(--color-accent);">My account</p><h1 class="mt-2 text-4xl font-semibold" style="font-family:var(--font-heading);">Welcome back</h1><p id="account-email-display" class="mt-2 text-[color:var(--color-muted)]"></p></div>
+        <button id="account-logout" class="button-secondary rounded-full border border-[color:var(--color-primary)] px-5 py-2 text-sm font-semibold" style="color:var(--color-primary-dark);">Sign out</button>
+      </div>
+      <div class="grid gap-8 md:grid-cols-2">
+        <section class="rounded-[var(--radius-lg)] bg-white p-6 shadow-[var(--shadow-soft)]"><h2 class="text-2xl font-semibold" style="font-family:var(--font-heading);">Orders</h2><div id="account-orders" class="mt-5 space-y-3 text-sm text-[color:var(--color-muted)]">Loading orders…</div></section>
+        <section class="rounded-[var(--radius-lg)] bg-white p-6 shadow-[var(--shadow-soft)]"><h2 class="text-2xl font-semibold" style="font-family:var(--font-heading);">Quotes</h2><div id="account-quotes" class="mt-5 space-y-3 text-sm text-[color:var(--color-muted)]">Loading quotes…</div></section>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const accountLogin = document.querySelector('#account-login');
+  const accountDashboard = document.querySelector('#account-dashboard');
+  const accountMessage = document.querySelector('#account-message');
+  const escapeHtml = (value) => String(value ?? '').replace(/[&<>'"]/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[character]);
+  const money = (cents) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(Number(cents || 0) / 100);
+  const api = async (url, options = {}) => { const response = await fetch(url, { credentials: 'same-origin', ...options }); const payload = await response.json().catch(() => ({})); if (!response.ok) throw new Error(payload.error || `Request failed (${response.status})`); return payload; };
+  const showMessage = (text, error = false) => { if (!accountMessage) return; accountMessage.textContent = text; accountMessage.className = `rounded-[var(--radius-sm)] px-4 py-3 text-sm ${error ? 'bg-red-50 text-red-700' : 'bg-green-50 text-green-700'}`; };
+
+  async function loadAccount() {
+    try {
+      const { user } = await api('/api/auth/session');
+      accountLogin?.classList.add('hidden');
+      accountDashboard?.classList.remove('hidden');
+      document.querySelector('#account-email-display').textContent = user.email;
+      const [orderData, quoteData] = await Promise.all([api('/api/account/orders'), api('/api/account/quotes')]);
+      const orders = document.querySelector('#account-orders');
+      const quotes = document.querySelector('#account-quotes');
+      if (orders) orders.innerHTML = orderData.orders?.length ? orderData.orders.map((order) => `<article class="rounded-[var(--radius-sm)] border border-[color:var(--color-secondary)] p-4"><div class="flex justify-between gap-3"><strong class="text-[color:var(--color-text)]">Order ${escapeHtml(order.id.slice(0, 8))}</strong><span>${money(order.total_cents)}</span></div><p class="mt-2 capitalize">${escapeHtml(order.status)}</p></article>`).join('') : 'You do not have any orders yet.';
+      if (quotes) quotes.innerHTML = quoteData.quotes?.length ? quoteData.quotes.map((quote) => `<article class="rounded-[var(--radius-sm)] border border-[color:var(--color-secondary)] p-4"><strong class="text-[color:var(--color-text)]">Quote ${escapeHtml(quote.id.slice(0, 8))}</strong><p class="mt-2 capitalize">${escapeHtml(quote.status)}</p></article>`).join('') : 'You do not have any quotes yet.';
+    } catch {
+      accountLogin?.classList.remove('hidden');
+      accountDashboard?.classList.add('hidden');
+    }
+  }
+
+  document.querySelector('#account-login-form')?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const button = form.querySelector('button');
+    button.disabled = true;
+    try { await api('/api/auth/request-link', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: new FormData(form).get('email'), returnTo: '/account' }) }); showMessage('Check your email for the secure sign-in link.'); }
+    catch (error) { showMessage(error.message, true); }
+    finally { button.disabled = false; }
+  });
+  document.querySelector('#account-logout')?.addEventListener('click', async () => { await api('/api/auth/logout', { method: 'POST' }).catch(() => null); location.reload(); });
+  loadAccount();
+</script>

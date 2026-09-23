@@ -1,0 +1,38 @@
+---
+const year = new Date().getFullYear();
+---
+<footer class="mt-24 border-t border-[color:var(--color-secondary)] bg-[color:var(--color-surface)]">
+  <div class="max-w-6xl mx-auto px-6 py-14 grid gap-10 md:grid-cols-3">
+    <div>
+      <div class="flex items-center gap-3 mb-3">
+        <img src="/logo.png" alt="Nadine Kay" class="h-10 w-10 rounded-full object-cover" />
+        <span class="text-xl" style="font-family:var(--font-script); color:var(--color-primary-dark);">Nadine Kay</span>
+      </div>
+      <p class="text-sm text-[color:var(--color-muted)] max-w-xs">
+        Handmade home fragrance, bath and body care, and lip products made in small batches.
+      </p>
+    </div>
+    <div>
+      <h3 class="font-semibold mb-3 text-sm tracking-wide uppercase" style="font-family:var(--font-heading);">Shop</h3>
+      <ul class="space-y-2 text-sm text-[color:var(--color-muted)]">
+        <li><a href="/shop" class="hover:text-[color:var(--color-primary-dark)]">Candles &amp; Home Fragrance</a></li>
+        <li><a href="/shop" class="hover:text-[color:var(--color-primary-dark)]">Bath &amp; Body Care</a></li>
+        <li><a href="/shop" class="hover:text-[color:var(--color-primary-dark)]">Lip Gloss</a></li>
+        <li><a href="/shop" class="hover:text-[color:var(--color-primary-dark)]">All Products</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="font-semibold mb-3 text-sm tracking-wide uppercase" style="font-family:var(--font-heading);">Connect</h3>
+      <ul class="space-y-2 text-sm text-[color:var(--color-muted)]">
+        <li><a href="mailto:hello@nadinekay.com" class="hover:text-[color:var(--color-primary-dark)]">hello@nadinekay.com</a></li>
+        <li><a href="#" class="hover:text-[color:var(--color-primary-dark)]">Instagram</a></li>
+        <li><a href="#" class="hover:text-[color:var(--color-primary-dark)]">Etsy</a></li>
+        <li><a href="/contact" class="hover:text-[color:var(--color-primary-dark)]">Contact</a></li>
+        <li><a href="/admin" class="hover:text-[color:var(--color-primary-dark)]">Admin</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-[color:var(--color-secondary)] py-5 text-center text-xs text-[color:var(--color-muted)]">
+    &copy; {year} Nadine Kay. All rights reserved.
+  </div>
+</footer>

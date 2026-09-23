@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ShopCatalog from '../components/ShopCatalog.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+---
+<BaseLayout title="Shop | Nadine Kay" description="Shop handmade candles, home fragrance, bath and body products, and lip care from Nadine Kay.">
+  <section class="max-w-6xl mx-auto px-6 pt-16 pb-8 text-center">
+    <p class="uppercase tracking-[0.2em] text-xs font-semibold mb-3" style="color:var(--color-accent);">The Collection</p>
+    <h1 class="text-4xl font-semibold mb-4" style="font-family:var(--font-heading);">Shop Nadine Kay</h1>
+    <p class="text-[color:var(--color-muted)] max-w-xl mx-auto">
+      Explore candles, home fragrance, bath and body care, and lip gloss made in small batches. Don't see a scent you love? Reach out &mdash; custom orders are always welcome.
+    </p>
+  </section>
+
+  <section class="max-w-6xl mx-auto px-6 pb-16">
+    <ShopCatalog />
+  </section>
+
+  <CtaBanner
+    heading="Have questions about an order?"
+    subheading="Send a message and we'll get back to you within a day or two."
+    buttonLabel="Contact Us"
+    buttonHref="/contact"
+  />
+</BaseLayout>

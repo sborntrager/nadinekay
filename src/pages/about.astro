@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+---
+<BaseLayout title="About | Nadine Kay" description="The story behind Nadine Kay's handmade bath bombs.">
+  <section class="max-w-4xl mx-auto px-6 py-20">
+    <p class="uppercase tracking-[0.2em] text-xs font-semibold mb-3 text-center" style="color:var(--color-accent);">Our Story</p>
+    <h1 class="text-4xl font-semibold mb-8 text-center" style="font-family:var(--font-heading);">About Nadine Kay</h1>
+
+    <div class="flex justify-center mb-10">
+      <img src="/logo.png" alt="Nadine Kay" class="h-40 w-40 rounded-full object-cover shadow-xl" />
+    </div>
+
+    <div class="prose prose-neutral max-w-none text-[color:var(--color-text)] space-y-5 text-base leading-relaxed">
+      <p>
+        Nadine Kay started with a simple idea: bath time should feel like a small luxury, not an afterthought.
+        Every bath bomb, soap, and scrub is mixed and poured by hand in small batches, using real ingredients we're
+        happy to put on our own skin &mdash; shea butter, coconut oil, and skin-loving oils, with no shortcuts.
+      </p>
+      <p>
+        What started as a kitchen-counter hobby has grown into a small business built on care: for the ingredients,
+        for the craft, and for the people who use what we make. We test every scent and color combination ourselves
+        before it ever reaches the shop.
+      </p>
+      <p>
+        Thank you for supporting a small, handmade business. We can't wait for you to feel good and smell good, too.
+      </p>
+    </div>
+  </section>
+
+  <CtaBanner
+    heading="Curious about a custom order?"
+    subheading="Custom colors, scents, and gift bundles are always welcome."
+    buttonLabel="Get in Touch"
+    buttonHref="/contact"
+  />
+</BaseLayout>

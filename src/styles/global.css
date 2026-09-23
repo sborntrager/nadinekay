@@ -1,0 +1,213 @@
+@import "tailwindcss";
+
+/* Shared feedback for native buttons and controls styled as buttons. */
+:is(
+  button,
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"],
+  .button-link,
+  [data-category-link],
+  summary,
+  label:has(input[type="file"])
+) {
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: rgba(46, 143, 190, 0.22);
+  transition:
+    transform 160ms ease,
+    filter 160ms ease,
+    opacity 160ms ease,
+    box-shadow 160ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  :is(
+    button,
+    input[type="button"],
+    input[type="submit"],
+    input[type="reset"],
+    .button-link,
+    [data-category-link],
+    summary,
+    label:has(input[type="file"])
+  ):not(:disabled):not([aria-disabled="true"]):hover {
+    transform: translateY(-2px);
+    filter: brightness(0.92) saturate(1.08);
+  }
+}
+
+:is(
+  button,
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"],
+  .button-link,
+  [data-category-link],
+  summary,
+  label:has(input[type="file"])
+):not(:disabled):not([aria-disabled="true"]):active {
+  transform: translateY(1px) scale(0.97);
+  filter: brightness(0.82) saturate(1.12);
+  opacity: 0.9;
+  transition-duration: 60ms;
+}
+
+:is(
+  button,
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"],
+  .button-link,
+  [data-category-link],
+  summary,
+  label:has(input[type="file"])
+):focus-visible {
+  outline: 3px solid rgba(46, 143, 190, 0.5);
+  outline-offset: 3px;
+}
+
+:is(button, input[type="button"], input[type="submit"], input[type="reset"]):disabled,
+:is(.button-link, [data-category-link], summary)[aria-disabled="true"] {
+  cursor: not-allowed;
+  filter: grayscale(0.35);
+  opacity: 0.55;
+}
+
+/* Touchscreens have no rollover, so taps use a stronger state change. */
+@media (hover: none), (pointer: coarse) {
+  :is(
+    button,
+    input[type="button"],
+    input[type="submit"],
+    input[type="reset"],
+    .button-link,
+    [data-category-link],
+    summary,
+    label:has(input[type="file"])
+  ):not(:disabled):not([aria-disabled="true"]):active {
+    transform: scale(0.94);
+    filter: brightness(0.75) saturate(1.16);
+    opacity: 0.84;
+    box-shadow: inset 0 0 0 2px rgba(46, 143, 190, 0.28);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :is(
+    button,
+    input[type="button"],
+    input[type="submit"],
+    input[type="reset"],
+    .button-link,
+    [data-category-link],
+    summary,
+    label:has(input[type="file"])
+  ) {
+    transition-duration: 1ms;
+  }
+
+  :is(
+    button,
+    input[type="button"],
+    input[type="submit"],
+    input[type="reset"],
+    .button-link,
+    [data-category-link],
+    summary,
+    label:has(input[type="file"])
+  ):not(:disabled):not([aria-disabled="true"]):hover,
+  :is(
+    button,
+    input[type="button"],
+    input[type="submit"],
+    input[type="reset"],
+    .button-link,
+    [data-category-link],
+    summary,
+    label:has(input[type="file"])
+  ):not(:disabled):not([aria-disabled="true"]):active {
+    transform: none;
+  }
+}
+
+/* Explicit visual variants make rollover and pressed states unmistakable. */
+.admin-action {
+  display: inline-flex;
+  min-height: 2.25rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(46, 143, 190, 0.22);
+  border-radius: 9999px;
+  background: rgba(79, 184, 224, 0.12);
+  padding: 0.4rem 0.7rem;
+  color: #0369a1;
+  line-height: 1;
+}
+
+.admin-action--danger {
+  border-color: rgba(220, 38, 38, 0.22);
+  background: rgba(220, 38, 38, 0.08);
+  color: #dc2626;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .button-primary:not(:disabled):not([aria-disabled="true"]):hover {
+    background: var(--color-primary-dark) !important;
+    box-shadow: 0 10px 22px rgba(46, 143, 190, 0.3);
+    filter: none;
+  }
+
+  .button-secondary:not(:disabled):not([aria-disabled="true"]):hover {
+    border-color: var(--color-primary-dark) !important;
+    background: var(--color-surface) !important;
+    color: var(--color-primary-dark) !important;
+    box-shadow: 0 7px 16px rgba(46, 143, 190, 0.16);
+    filter: none;
+  }
+
+  .button-light:not(:disabled):not([aria-disabled="true"]):hover {
+    background: var(--color-surface) !important;
+    box-shadow: 0 10px 22px rgba(34, 48, 60, 0.2);
+    filter: none;
+  }
+
+  .admin-action:not(:disabled):hover {
+    border-color: var(--color-primary-dark);
+    background: var(--color-primary-dark);
+    color: white;
+    box-shadow: 0 7px 16px rgba(46, 143, 190, 0.25);
+    filter: none;
+  }
+
+  .admin-action--danger:not(:disabled):hover {
+    border-color: #dc2626;
+    background: #dc2626;
+    box-shadow: 0 7px 16px rgba(220, 38, 38, 0.22);
+  }
+}
+
+.button-primary:not(:disabled):not([aria-disabled="true"]):active {
+  background: #236f95 !important;
+}
+
+.button-secondary:not(:disabled):not([aria-disabled="true"]):active {
+  border-color: var(--color-primary-dark) !important;
+  background: var(--color-secondary) !important;
+  color: #236f95 !important;
+}
+
+.button-light:not(:disabled):not([aria-disabled="true"]):active {
+  background: #dceff7 !important;
+}
+
+.admin-action:not(:disabled):active {
+  border-color: #236f95;
+  background: #236f95;
+  color: white;
+}
+
+.admin-action--danger:not(:disabled):active {
+  border-color: #991b1b;
+  background: #991b1b;
+}

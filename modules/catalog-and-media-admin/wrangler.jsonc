@@ -1,0 +1,24 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "replace-with-project-catalog",
+  "main": "src/index.js",
+  "compatibility_date": "2026-09-10",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "replace-with-shared-project-d1",
+      "database_id": "replace-with-d1-database-id",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "MEDIA_BUCKET",
+      "bucket_name": "replace-with-product-media-bucket"
+    }
+  ],
+  "vars": {
+    "PUBLIC_MEDIA_BASE_URL": "https://media.example.com",
+    "MAX_MEDIA_BYTES": "10485760"
+  }
+}

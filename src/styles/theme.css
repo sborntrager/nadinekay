@@ -1,0 +1,19 @@
+/* Nadine Kay brand tokens — derived from the logo (sky blue + rose-gold crown) */
+:root{
+  --color-primary:#4FB8E0;      /* sky blue — main brand color, buttons/links */
+  --color-primary-dark:#2E8FBE; /* hover/pressed state */
+  --color-secondary:#A8E5F7;    /* soft sky blue — light accents, backgrounds */
+  --color-accent:#D9A875;       /* rose gold — luxury accent, borders, highlights */
+  --color-accent-pink:#F4C6D6;  /* soft pink — secondary accent */
+  --color-bg:#FFFFFF;
+  --color-surface:#F3FAFD;      /* very light blue tint for section backgrounds */
+  --color-text:#22303C;         /* charcoal-blue body text */
+  --color-muted:#64748b;
+  --font-heading:"Playfair Display", Georgia, serif;
+  --font-script:"Great Vibes", cursive;
+  --font-body:"Inter", system-ui, sans-serif;
+  --radius-lg:24px;
+  --radius-md:16px;
+  --radius-sm:10px;
+  --shadow-soft:0 12px 32px rgba(79,184,224,0.15);
+}

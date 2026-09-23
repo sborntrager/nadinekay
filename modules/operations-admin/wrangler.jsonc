@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "replace-with-project-operations-admin",
+  "main": "src/index.js",
+  "compatibility_date": "2026-09-10",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "replace-with-shared-project-d1",
+      "database_id": "replace-with-d1-database-id"
+    }
+  ]
+}

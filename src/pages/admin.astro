@@ -1,0 +1,234 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Admin | Nadine Kay" description="Nadine Kay administration dashboard.">
+  <section class="min-h-[calc(100vh-9rem)] bg-[color:var(--color-surface)] px-6 py-12">
+    <div class="mx-auto max-w-md" id="login-panel">
+      <div class="rounded-[var(--radius-lg)] border border-[color:var(--color-secondary)] bg-white p-8 shadow-[var(--shadow-soft)]">
+        <div class="mb-8 text-center">
+          <img src="/logo.png" alt="Nadine Kay" class="mx-auto mb-4 h-20 w-20 object-contain" />
+          <p class="mb-2 text-xs font-semibold uppercase tracking-[0.2em]" style="color:var(--color-accent);">Private area</p>
+          <h1 class="text-3xl font-semibold" style="font-family:var(--font-heading);">Admin login</h1>
+          <p class="mt-3 text-sm text-[color:var(--color-muted)]">Enter your authorized email and we will send you a secure sign-in link.</p>
+        </div>
+        <form id="admin-login-form" class="space-y-5">
+          <div>
+            <label for="admin-email" class="mb-2 block text-sm font-medium">Email address</label>
+            <input id="admin-email" name="email" type="email" autocomplete="email" required class="w-full rounded-[var(--radius-sm)] border border-[color:var(--color-secondary)] px-4 py-3 outline-none focus:border-[color:var(--color-primary)]" />
+          </div>
+          <p id="login-message" class="hidden rounded-[var(--radius-sm)] px-4 py-3 text-sm" role="status"></p>
+          <button type="submit" class="button-primary w-full rounded-full px-5 py-3 text-sm font-semibold text-white shadow-[0_8px_20px_rgba(79,184,224,0.35)]" style="background:var(--color-primary);">Email me a sign-in link</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="mx-auto hidden max-w-7xl" id="dashboard-panel">
+      <div class="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+        <div>
+          <p class="mb-2 text-xs font-semibold uppercase tracking-[0.2em]" style="color:var(--color-accent);">Nadine Kay</p>
+          <h1 class="text-4xl font-semibold" style="font-family:var(--font-heading);">Admin dashboard</h1>
+          <p class="mt-2 text-[color:var(--color-muted)]">Signed in as <span id="admin-email-display"></span></p>
+        </div>
+        <button id="admin-logout" type="button" class="button-secondary rounded-full border border-[color:var(--color-primary)] px-5 py-2 text-sm font-semibold" style="color:var(--color-primary-dark);">Sign out</button>
+      </div>
+
+      <p id="dashboard-message" class="mb-6 hidden rounded-[var(--radius-sm)] px-4 py-3 text-sm" role="status"></p>
+
+      <div class="mb-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="rounded-[var(--radius-md)] bg-white p-5 shadow-[var(--shadow-soft)]"><p class="text-sm text-[color:var(--color-muted)]">Products</p><p id="stat-products" class="mt-2 text-3xl font-semibold" style="font-family:var(--font-heading);">—</p></div>
+        <div class="rounded-[var(--radius-md)] bg-white p-5 shadow-[var(--shadow-soft)]"><p class="text-sm text-[color:var(--color-muted)]">Open orders</p><p id="stat-orders" class="mt-2 text-3xl font-semibold" style="font-family:var(--font-heading);">—</p></div>
+        <div class="rounded-[var(--radius-md)] bg-white p-5 shadow-[var(--shadow-soft)]"><p class="text-sm text-[color:var(--color-muted)]">Users</p><p id="stat-users" class="mt-2 text-3xl font-semibold" style="font-family:var(--font-heading);">—</p></div>
+        <div class="rounded-[var(--radius-md)] bg-white p-5 shadow-[var(--shadow-soft)]"><p class="text-sm text-[color:var(--color-muted)]">Revenue</p><p id="stat-revenue" class="mt-2 text-3xl font-semibold" style="font-family:var(--font-heading);">—</p></div>
+      </div>
+
+      <div class="space-y-8">
+        <section class="rounded-[var(--radius-lg)] bg-white p-6 shadow-[var(--shadow-soft)]">
+          <div class="mb-6 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+            <div><h2 class="text-2xl font-semibold" style="font-family:var(--font-heading);">Products</h2><p class="mt-1 text-sm text-[color:var(--color-muted)]">Add products and edit descriptions, prices, status, and pictures.</p></div>
+            <button id="show-product-form" type="button" class="button-primary rounded-full px-4 py-2 text-sm font-semibold text-white" style="background:var(--color-primary);">Add product</button>
+          </div>
+
+          <form id="product-form" class="mb-7 hidden grid gap-4 rounded-[var(--radius-md)] bg-[color:var(--color-surface)] p-5 md:grid-cols-2">
+            <div><label class="mb-1 block text-sm font-medium">Name</label><input name="name" required class="w-full rounded-[var(--radius-sm)] border border-[color:var(--color-secondary)] px-3 py-2" /></div>
+            <div><label class="mb-1 block text-sm font-medium">Category</label><select name="categoryId" required class="w-full rounded-[var(--radius-sm)] border border-[color:var(--color-secondary)] bg-white px-3 py-2"></select></div>
+            <div><label class="mb-1 block text-sm font-medium">Price</label><input name="price" type="number" min="0" step="0.01" required class="w-full rounded-[var(--radius-sm)] border border-[color:var(--color-secondary)] px-3 py-2" /></div>
+            <div><label class="mb-1 block text-sm font-medium">SKU</label><div class="rounded-[var(--radius-sm)] border border-dashed border-[color:var(--color-secondary)] px-3 py-2 text-sm text-[color:var(--color-muted)]">Generated automatically when saved</div></div>
+            <div class="md:col-span-2"><label class="mb-1 block text-sm font-medium">Description</label><textarea name="description" rows="3" required class="w-full rounded-[var(--radius-sm)] border border-[color:var(--color-secondary)] px-3 py-2"></textarea></div>
+            <div class="flex gap-3 md:col-span-2"><button type="submit" class="button-primary rounded-full px-5 py-2 text-sm font-semibold text-white" style="background:var(--color-primary);">Save product</button><button id="cancel-product-form" type="button" class="button-secondary rounded-full border border-[color:var(--color-secondary)] px-5 py-2 text-sm font-semibold">Cancel</button></div>
+          </form>
+
+          <div class="overflow-x-auto"><table class="w-full min-w-[48rem] text-left text-sm"><thead class="border-b border-[color:var(--color-secondary)] text-xs uppercase tracking-wide text-[color:var(--color-muted)]"><tr><th class="px-3 py-3">Product</th><th class="px-3 py-3">SKU</th><th class="px-3 py-3">Category</th><th class="px-3 py-3">Price</th><th class="px-3 py-3">Status</th><th class="px-3 py-3">Actions</th></tr></thead><tbody id="products-table"><tr><td colspan="6" class="px-3 py-6 text-center text-[color:var(--color-muted)]">Loading products…</td></tr></tbody></table></div>
+        </section>
+
+        <div class="grid gap-8 lg:grid-cols-2">
+          <section class="rounded-[var(--radius-lg)] bg-white p-6 shadow-[var(--shadow-soft)]"><h2 class="text-2xl font-semibold" style="font-family:var(--font-heading);">Orders</h2><div id="orders-list" class="mt-5 space-y-3 text-sm text-[color:var(--color-muted)]">Loading orders…</div></section>
+          <section class="rounded-[var(--radius-lg)] bg-white p-6 shadow-[var(--shadow-soft)]"><h2 class="text-2xl font-semibold" style="font-family:var(--font-heading);">Users</h2><div id="users-list" class="mt-5 space-y-3 text-sm text-[color:var(--color-muted)]">Loading users…</div></section>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const $ = (selector) => document.querySelector(selector);
+  const loginPanel = $('#login-panel');
+  const dashboardPanel = $('#dashboard-panel');
+  const loginForm = $('#admin-login-form');
+  const loginMessage = $('#login-message');
+  const dashboardMessage = $('#dashboard-message');
+  const productForm = $('#product-form');
+  let products = [];
+  let categories = [];
+  let currentUser = null;
+  let editingProductId = null;
+
+  const money = (cents) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(Number(cents || 0) / 100);
+  const escapeHtml = (value) => String(value ?? '').replace(/[&<>'"]/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[character]);
+  const message = (element, text, error = false) => {
+    if (!element) return;
+    element.textContent = text;
+    element.className = `mb-6 rounded-[var(--radius-sm)] px-4 py-3 text-sm ${error ? 'bg-red-50 text-red-700' : 'bg-green-50 text-green-700'}`;
+  };
+  const api = async (url, options = {}) => {
+    const response = await fetch(url, { credentials: 'same-origin', ...options });
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(payload.error || `Request failed (${response.status})`);
+    return payload;
+  };
+
+  async function loadDashboard() {
+    const [overview, catalog, categoryData, orderData, userData] = await Promise.all([
+      api('/api/admin/overview'),
+      api('/api/admin/catalog/products'),
+      api('/api/admin/catalog/categories'),
+      api('/api/admin/orders'),
+      currentUser?.role === 'admin' ? api('/api/admin/users') : Promise.resolve({ users: [] }),
+    ]);
+    products = catalog.products || [];
+    categories = categoryData.categories || [];
+    $('#stat-products').textContent = String(overview.cards.products || 0);
+    $('#stat-orders').textContent = String(overview.cards.openOrders || 0);
+    $('#stat-users').textContent = String(overview.cards.users || 0);
+    $('#stat-revenue').textContent = money(overview.cards.revenueCents);
+    renderProducts();
+    renderOrders(orderData.orders || []);
+    renderUsers(userData.users || []);
+    const select = productForm?.querySelector('[name="categoryId"]');
+    if (select) select.innerHTML = categories.map((category) => `<option value="${escapeHtml(category.id)}">${escapeHtml(category.name)}</option>`).join('');
+  }
+
+  function renderProducts() {
+    const table = $('#products-table');
+    if (!table) return;
+    const categoryOptions = (selectedId) => categories.map((category) => `<option value="${escapeHtml(category.id)}" ${category.id === selectedId ? 'selected' : ''}>${escapeHtml(category.name)}</option>`).join('');
+    table.innerHTML = products.length ? products.map((product) => {
+      const productRow = `<tr class="border-b border-[color:var(--color-secondary)]"><td class="px-3 py-4"><span class="font-medium">${escapeHtml(product.name)}</span><span class="block max-w-xs truncate text-xs text-[color:var(--color-muted)]">${escapeHtml(product.description)}</span></td><td class="px-3 py-4 text-xs">${escapeHtml(product.sku)}</td><td class="px-3 py-4">${escapeHtml(product.category || 'Uncategorized')}</td><td class="px-3 py-4">${money(product.price_cents)}</td><td class="px-3 py-4 capitalize">${escapeHtml(product.status)}</td><td class="px-3 py-4"><div class="flex flex-wrap gap-3"><button type="button" data-edit="${product.id}" class="admin-action font-semibold">Edit</button><button type="button" data-status="${product.id}" data-next="${product.status === 'published' ? 'hide' : 'publish'}" class="admin-action font-semibold">${product.status === 'published' ? 'Hide' : 'Publish'}</button><label class="admin-action cursor-pointer font-semibold">Picture<input data-image="${product.id}" type="file" accept="image/*" class="hidden"></label><button type="button" data-delete="${product.id}" class="admin-action admin-action--danger font-semibold">Delete</button></div></td></tr>`;
+      if (editingProductId !== product.id) return productRow;
+      const editRow = `<tr class="border-b border-[color:var(--color-secondary)]"><td colspan="6" class="p-0"><form data-inline-edit="${product.id}" class="grid gap-4 bg-[color:var(--color-surface)] p-5 md:grid-cols-2"><div><label class="mb-1 block text-sm font-medium">Name</label><input name="name" value="${escapeHtml(product.name)}" required class="w-full rounded-[var(--radius-sm)] border border-[color:var(--color-secondary)] px-3 py-2"></div><div><label class="mb-1 block text-sm font-medium">Category</label><select name="categoryId" required class="w-full rounded-[var(--radius-sm)] border border-[color:var(--color-secondary)] bg-white px-3 py-2">${categoryOptions(product.category_id)}</select></div><div><label class="mb-1 block text-sm font-medium">Price</label><input name="price" type="number" min="0" step="0.01" value="${Number(product.price_cents || 0) / 100}" required class="w-full rounded-[var(--radius-sm)] border border-[color:var(--color-secondary)] px-3 py-2"></div><div><label class="mb-1 block text-sm font-medium">SKU</label><input name="sku" value="${escapeHtml(product.sku)}" readonly class="w-full rounded-[var(--radius-sm)] border border-[color:var(--color-secondary)] bg-white/60 px-3 py-2 text-[color:var(--color-muted)]"></div><div class="md:col-span-2"><label class="mb-1 block text-sm font-medium">Description</label><textarea name="description" rows="3" required class="w-full rounded-[var(--radius-sm)] border border-[color:var(--color-secondary)] px-3 py-2">${escapeHtml(product.description)}</textarea></div><div class="flex gap-3 md:col-span-2"><button type="submit" class="button-primary rounded-full px-5 py-2 text-sm font-semibold text-white" style="background:var(--color-primary);">Save changes</button><button type="button" data-cancel-edit class="button-secondary rounded-full border border-[color:var(--color-secondary)] px-5 py-2 text-sm font-semibold">Cancel</button></div></form></td></tr>`;
+      return productRow + editRow;
+    }).join('') : '<tr><td colspan="6" class="px-3 py-6 text-center text-[color:var(--color-muted)]">No products yet.</td></tr>';
+  }
+
+  function renderOrders(orders) {
+    const list = $('#orders-list');
+    if (!list) return;
+    list.innerHTML = orders.length ? orders.map((order) => `<div class="rounded-[var(--radius-sm)] border border-[color:var(--color-secondary)] p-4"><div class="flex justify-between gap-3"><span class="font-semibold text-[color:var(--color-text)]">${escapeHtml(order.customer_email)}</span><span>${money(order.total_cents)}</span></div><select data-order="${order.id}" class="mt-3 rounded border border-[color:var(--color-secondary)] bg-white px-2 py-1"><option value="pending" ${order.status === 'pending' ? 'selected' : ''}>Pending</option><option value="confirmed" ${order.status === 'confirmed' ? 'selected' : ''}>Confirmed</option><option value="fulfilled" ${order.status === 'fulfilled' ? 'selected' : ''}>Fulfilled</option><option value="cancelled" ${order.status === 'cancelled' ? 'selected' : ''}>Cancelled</option></select></div>`).join('') : 'No orders yet.';
+  }
+
+  function renderUsers(users) {
+    const list = $('#users-list');
+    if (!list) return;
+    list.innerHTML = users.length ? users.map((user) => `<div class="flex items-center justify-between gap-3 rounded-[var(--radius-sm)] border border-[color:var(--color-secondary)] p-4"><span class="min-w-0 truncate text-[color:var(--color-text)]">${escapeHtml(user.email)}</span><select data-user="${user.id}" class="rounded border border-[color:var(--color-secondary)] bg-white px-2 py-1"><option value="member" ${user.role === 'member' ? 'selected' : ''}>Customer</option><option value="editor" ${user.role === 'editor' ? 'selected' : ''}>Editor</option><option value="admin" ${user.role === 'admin' ? 'selected' : ''}>Admin</option></select></div>`).join('') : currentUser?.role === 'admin' ? 'No users yet.' : 'Admin permission is required to manage users.';
+  }
+
+  async function checkSession() {
+    try {
+      const { user } = await api('/api/auth/session');
+      if (!['editor', 'admin'].includes(user?.role)) throw new Error('Staff access is required.');
+      currentUser = user;
+      loginPanel?.classList.add('hidden');
+      dashboardPanel?.classList.remove('hidden');
+      $('#admin-email-display').textContent = user.email;
+      await loadDashboard();
+    } catch (error) {
+      loginPanel?.classList.remove('hidden');
+      dashboardPanel?.classList.add('hidden');
+      if (String(error.message) !== 'Request failed (401)') message(loginMessage, error.message, true);
+    }
+  }
+
+  loginForm?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const button = loginForm.querySelector('button[type="submit"]');
+    button.disabled = true;
+    try {
+      await api('/api/auth/request-link', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: new FormData(loginForm).get('email'), returnTo: '/admin' }) });
+      message(loginMessage, 'Check your email for the secure sign-in link.');
+    } catch (error) { message(loginMessage, error.message, true); }
+    finally { button.disabled = false; }
+  });
+
+  $('#admin-logout')?.addEventListener('click', async () => { await api('/api/auth/logout', { method: 'POST' }).catch(() => null); location.reload(); });
+  $('#show-product-form')?.addEventListener('click', () => { productForm?.reset(); productForm?.classList.remove('hidden'); });
+  $('#cancel-product-form')?.addEventListener('click', () => productForm?.classList.add('hidden'));
+
+  productForm?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const data = new FormData(productForm);
+    const body = { name: data.get('name'), categoryId: data.get('categoryId'), priceCents: Math.round(Number(data.get('price')) * 100), description: data.get('description') };
+    try {
+      await api('/api/admin/catalog/products', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+      productForm.classList.add('hidden');
+      message(dashboardMessage, 'Product saved.');
+      await loadDashboard();
+    } catch (error) { message(dashboardMessage, error.message, true); }
+  });
+
+  $('#products-table')?.addEventListener('click', async (event) => {
+    const button = event.target.closest('button');
+    if (!button) return;
+    if (button.dataset.edit) {
+      editingProductId = button.dataset.edit;
+      renderProducts();
+      document.querySelector(`[data-inline-edit="${editingProductId}"]`)?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+    if (button.hasAttribute('data-cancel-edit')) {
+      editingProductId = null;
+      renderProducts();
+    }
+    if (button.dataset.delete) {
+      const product = products.find((item) => item.id === button.dataset.delete);
+      if (!confirm(`Delete ${product?.name || 'this product'}? This cannot be undone.`)) return;
+      try { await api(`/api/admin/catalog/products/${button.dataset.delete}`, { method: 'DELETE' }); editingProductId = null; message(dashboardMessage, 'Product deleted.'); await loadDashboard(); }
+      catch (error) { message(dashboardMessage, error.message, true); }
+    }
+    if (button.dataset.status) {
+      try { await api(`/api/admin/catalog/products/${button.dataset.status}/${button.dataset.next}`, { method: 'POST' }); await loadDashboard(); }
+      catch (error) { message(dashboardMessage, error.message, true); }
+    }
+  });
+
+  $('#products-table')?.addEventListener('submit', async (event) => {
+    const form = event.target;
+    if (!(form instanceof HTMLFormElement) || !form.dataset.inlineEdit) return;
+    event.preventDefault();
+    const data = new FormData(form);
+    const body = { name: data.get('name'), categoryId: data.get('categoryId'), priceCents: Math.round(Number(data.get('price')) * 100), sku: data.get('sku'), description: data.get('description') };
+    try { await api(`/api/admin/catalog/products/${form.dataset.inlineEdit}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }); editingProductId = null; message(dashboardMessage, 'Product updated.'); await loadDashboard(); }
+    catch (error) { message(dashboardMessage, error.message, true); }
+  });
+
+  $('#products-table')?.addEventListener('change', async (event) => {
+    const input = event.target;
+    if (!(input instanceof HTMLInputElement) || !input.dataset.image || !input.files?.[0]) return;
+    const product = products.find((item) => item.id === input.dataset.image);
+    try { await api(`/api/admin/catalog/products/${input.dataset.image}/assets`, { method: 'POST', headers: { 'Content-Type': input.files[0].type, 'X-Alt-Text': product?.name || '' }, body: input.files[0] }); message(dashboardMessage, 'Product picture uploaded.'); await loadDashboard(); }
+    catch (error) { message(dashboardMessage, error.message, true); }
+  });
+
+  $('#orders-list')?.addEventListener('change', async (event) => { const select = event.target; if (!(select instanceof HTMLSelectElement) || !select.dataset.order) return; try { await api(`/api/admin/orders/${select.dataset.order}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ status: select.value }) }); } catch (error) { message(dashboardMessage, error.message, true); } });
+  $('#users-list')?.addEventListener('change', async (event) => { const select = event.target; if (!(select instanceof HTMLSelectElement) || !select.dataset.user) return; try { await api(`/api/admin/users/${select.dataset.user}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ role: select.value }) }); } catch (error) { message(dashboardMessage, error.message, true); } });
+
+  checkSession();
+</script>

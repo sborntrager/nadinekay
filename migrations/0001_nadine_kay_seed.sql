@@ -1,0 +1,30 @@
+INSERT OR IGNORE INTO catalog_categories (id, name, slug) VALUES
+  ('cat-candles', 'Candles', 'candles'),
+  ('cat-carpet-seasoning', 'Carpet Seasoning', 'carpet-seasoning'),
+  ('cat-air-freshener', 'Air Freshener', 'air-freshener'),
+  ('cat-bath-bombs', 'Bath Bombs', 'bath-bombs'),
+  ('cat-soaps', 'Soaps', 'soaps'),
+  ('cat-body-butter', 'Body Butter', 'body-butter'),
+  ('cat-body-scrub', 'Body Scrub', 'body-scrub'),
+  ('cat-body-oil', 'Body Oil', 'body-oil'),
+  ('cat-lip-gloss', 'Lip Gloss', 'lip-gloss');
+
+INSERT OR IGNORE INTO catalog_products (id, category_id, name, slug, description, price_cents, status) VALUES
+  ('prod-candle-1', 'cat-candles', 'Signature Candle No. 1', 'signature-candle-1', 'A hand-poured candle with a warm, welcoming fragrance.', 1800, 'published'),
+  ('prod-candle-2', 'cat-candles', 'Signature Candle No. 2', 'signature-candle-2', 'A clean-burning candle created for everyday moments.', 1800, 'published'),
+  ('prod-carpet-1', 'cat-carpet-seasoning', 'Carpet Seasoning No. 1', 'carpet-seasoning-1', 'A scented carpet refresher for a clean, inviting home.', 1200, 'published'),
+  ('prod-carpet-2', 'cat-carpet-seasoning', 'Carpet Seasoning No. 2', 'carpet-seasoning-2', 'An easy-to-use powder that refreshes carpets and rugs.', 1200, 'published'),
+  ('prod-air-1', 'cat-air-freshener', 'Air Freshener No. 1', 'air-freshener-1', 'A light room spray made to refresh everyday spaces.', 1000, 'published'),
+  ('prod-air-2', 'cat-air-freshener', 'Air Freshener No. 2', 'air-freshener-2', 'A versatile fragrance mist for rooms and linens.', 1000, 'published'),
+  ('prod-bomb-1', 'cat-bath-bombs', 'Bath Bomb No. 1', 'bath-bomb-1', 'A fragrant bath bomb for a relaxing, fizzy soak.', 800, 'published'),
+  ('prod-bomb-2', 'cat-bath-bombs', 'Bath Bomb No. 2', 'bath-bomb-2', 'A colorful bath treat made with skin-loving oils.', 800, 'published'),
+  ('prod-soap-1', 'cat-soaps', 'Handmade Soap No. 1', 'handmade-soap-1', 'A gentle handmade soap with a creamy, rich lather.', 900, 'published'),
+  ('prod-soap-2', 'cat-soaps', 'Handmade Soap No. 2', 'handmade-soap-2', 'An everyday cleansing bar with an inviting scent.', 900, 'published'),
+  ('prod-butter-1', 'cat-body-butter', 'Body Butter No. 1', 'body-butter-1', 'A rich whipped moisturizer for soft, nourished skin.', 1600, 'published'),
+  ('prod-butter-2', 'cat-body-butter', 'Body Butter No. 2', 'body-butter-2', 'A velvety body butter made for lasting moisture.', 1600, 'published'),
+  ('prod-scrub-1', 'cat-body-scrub', 'Body Scrub No. 1', 'body-scrub-1', 'A smoothing sugar scrub that gently buffs dry skin.', 1400, 'published'),
+  ('prod-scrub-2', 'cat-body-scrub', 'Body Scrub No. 2', 'body-scrub-2', 'A fragrant exfoliating scrub for a soft, polished finish.', 1400, 'published'),
+  ('prod-oil-1', 'cat-body-oil', 'Body Oil No. 1', 'body-oil-1', 'A lightweight moisturizing oil for a healthy-looking glow.', 1500, 'published'),
+  ('prod-oil-2', 'cat-body-oil', 'Body Oil No. 2', 'body-oil-2', 'A silky body oil that absorbs easily and leaves skin soft.', 1500, 'published'),
+  ('prod-gloss-1', 'cat-lip-gloss', 'Lip Gloss No. 1', 'lip-gloss-1', 'A smooth gloss with comfortable shine for everyday wear.', 800, 'published'),
+  ('prod-gloss-2', 'cat-lip-gloss', 'Lip Gloss No. 2', 'lip-gloss-2', 'A moisturizing gloss that gives lips a polished finish.', 800, 'published');

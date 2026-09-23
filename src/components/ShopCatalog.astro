@@ -1,0 +1,219 @@
+---
+const categories = [
+  {
+    name: 'Candles',
+    slug: 'candles',
+    description: 'Hand-poured fragrance for every room.',
+    colors: ['#F6E0B8', '#D9A875'],
+    products: [
+      { name: 'Signature Candle No. 1', description: 'A hand-poured candle with a warm, welcoming fragrance.', price: '$18.00' },
+      { name: 'Signature Candle No. 2', description: 'A clean-burning candle created for everyday moments.', price: '$18.00' },
+    ],
+  },
+  {
+    name: 'Carpet Seasoning',
+    slug: 'carpet-seasoning',
+    description: 'Fresh fragrance for carpets and rugs.',
+    colors: ['#C9B6F2', '#8E7DC6'],
+    products: [
+      { name: 'Carpet Seasoning No. 1', description: 'A scented carpet refresher for a clean, inviting home.', price: '$12.00' },
+      { name: 'Carpet Seasoning No. 2', description: 'An easy-to-use powder that refreshes carpets and rugs.', price: '$12.00' },
+    ],
+  },
+  {
+    name: 'Air Freshener',
+    slug: 'air-freshener',
+    description: 'Room and linen sprays for a quick refresh.',
+    colors: ['#8FD9EC', '#3FA9C9'],
+    products: [
+      { name: 'Air Freshener No. 1', description: 'A light room spray made to refresh everyday spaces.', price: '$10.00' },
+      { name: 'Air Freshener No. 2', description: 'A versatile fragrance mist for rooms and linens.', price: '$10.00' },
+    ],
+  },
+  {
+    name: 'Bath Bombs',
+    slug: 'bath-bombs',
+    description: 'Colorful fizz with skin-loving ingredients.',
+    colors: ['#F7B8CE', '#E9789F'],
+    products: [
+      { name: 'Bath Bomb No. 1', description: 'A fragrant bath bomb for a relaxing, fizzy soak.', price: '$8.00' },
+      { name: 'Bath Bomb No. 2', description: 'A colorful bath treat made with skin-loving oils.', price: '$8.00' },
+    ],
+  },
+  {
+    name: 'Soaps',
+    slug: 'soaps',
+    description: 'Gentle handmade soaps with rich lather.',
+    colors: ['#B9E4D0', '#5FB893'],
+    products: [
+      { name: 'Handmade Soap No. 1', description: 'A gentle handmade soap with a creamy, rich lather.', price: '$9.00' },
+      { name: 'Handmade Soap No. 2', description: 'An everyday cleansing bar with an inviting scent.', price: '$9.00' },
+    ],
+  },
+  {
+    name: 'Body Butter',
+    slug: 'body-butter',
+    description: 'Rich moisture for soft, nourished skin.',
+    colors: ['#FFD37A', '#F4A94A'],
+    products: [
+      { name: 'Body Butter No. 1', description: 'A rich whipped moisturizer for soft, nourished skin.', price: '$16.00' },
+      { name: 'Body Butter No. 2', description: 'A velvety body butter made for lasting moisture.', price: '$16.00' },
+    ],
+  },
+  {
+    name: 'Body Scrub',
+    slug: 'body-scrub',
+    description: 'Smoothing exfoliation for silky-soft skin.',
+    colors: ['#EADFCB', '#C9A876'],
+    products: [
+      { name: 'Body Scrub No. 1', description: 'A smoothing sugar scrub that gently buffs dry skin.', price: '$14.00' },
+      { name: 'Body Scrub No. 2', description: 'A fragrant exfoliating scrub for a soft, polished finish.', price: '$14.00' },
+    ],
+  },
+  {
+    name: 'Body Oil',
+    slug: 'body-oil',
+    description: 'Lightweight oils for a healthy-looking glow.',
+    colors: ['#F4C6D6', '#D9A875'],
+    products: [
+      { name: 'Body Oil No. 1', description: 'A lightweight moisturizing oil for a healthy-looking glow.', price: '$15.00' },
+      { name: 'Body Oil No. 2', description: 'A silky body oil that absorbs easily and leaves skin soft.', price: '$15.00' },
+    ],
+  },
+  {
+    name: 'Lip Gloss',
+    slug: 'lip-gloss',
+    description: 'Smooth shine and comfortable lip care.',
+    colors: ['#F7B8CE', '#D9A875'],
+    products: [
+      { name: 'Lip Gloss No. 1', description: 'A smooth gloss with comfortable shine for everyday wear.', price: '$8.00' },
+      { name: 'Lip Gloss No. 2', description: 'A moisturizing gloss that gives lips a polished finish.', price: '$8.00' },
+    ],
+  },
+];
+---
+
+<nav aria-label="Product categories" class="mb-16">
+  <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    {categories.map((category) => (
+      <a
+        href={`#${category.slug}`}
+        data-category-link
+        class="group overflow-hidden rounded-[var(--radius-lg)] border border-[color:var(--color-secondary)] bg-white shadow-[var(--shadow-soft)] transition hover:-translate-y-1"
+      >
+        <div
+          class="flex h-32 items-center justify-center"
+          style={`background:linear-gradient(135deg, ${category.colors[0]}, ${category.colors[1]});`}
+        >
+          <span class="flex h-16 w-16 items-center justify-center rounded-full border-4 border-white/60 bg-white/15 text-2xl text-white">✦</span>
+        </div>
+        <div class="p-5">
+          <p class="mb-1 text-xs font-semibold uppercase tracking-wide" style="color:var(--color-accent);">Shop category</p>
+          <h2 class="text-xl font-semibold" style="font-family:var(--font-heading);">{category.name}</h2>
+          <p class="mt-2 text-sm text-[color:var(--color-muted)]">{category.description}</p>
+          <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold" style="color:var(--color-primary-dark);">
+            View products <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+          </span>
+        </div>
+      </a>
+    ))}
+  </div>
+</nav>
+
+<div class="space-y-5" aria-label="Products by category">
+  {categories.map((category, categoryIndex) => (
+    <details
+      id={category.slug}
+      data-category={category.slug}
+      class="scroll-mt-44 overflow-hidden rounded-[var(--radius-lg)] border border-[color:var(--color-secondary)] bg-white shadow-[var(--shadow-soft)]"
+      open={categoryIndex === 0}
+    >
+      <summary class="flex cursor-pointer list-none items-center justify-between gap-4 bg-[color:var(--color-surface)] px-6 py-5 marker:content-none">
+        <span>
+          <span class="block text-2xl font-semibold" style="font-family:var(--font-heading);">{category.name}</span>
+          <span class="mt-1 block text-sm text-[color:var(--color-muted)]">{category.description}</span>
+        </span>
+        <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-xl text-white" style="background:var(--color-primary);" aria-hidden="true">+</span>
+      </summary>
+
+      <div data-product-grid class="grid gap-6 border-t border-[color:var(--color-secondary)] p-6 md:grid-cols-2">
+        {category.products.map((product, productIndex) => (
+          <article class="grid overflow-hidden rounded-[var(--radius-md)] border border-[color:var(--color-secondary)] sm:grid-cols-[10rem_1fr]">
+            <div
+              class="flex min-h-40 items-center justify-center"
+              style={`background:radial-gradient(circle at 35% 30%, ${category.colors[0]}, ${category.colors[1]} 75%);`}
+            >
+              <span class="flex h-20 w-20 items-center justify-center rounded-full border-4 border-white/60 bg-white/15 text-2xl text-white" aria-hidden="true">✦</span>
+            </div>
+            <div class="flex flex-col p-5">
+              <p class="text-xs font-semibold uppercase tracking-wide" style="color:var(--color-accent);">{category.name}</p>
+              <h3 class="mt-1 text-lg font-semibold" style="font-family:var(--font-heading);">{product.name}</h3>
+              <p class="mt-2 flex-1 text-sm leading-6 text-[color:var(--color-muted)]">{product.description}</p>
+              <div class="mt-5 flex items-center justify-between gap-3">
+                <span class="font-semibold" style="color:var(--color-primary-dark);">{product.price}</span>
+                <a
+                  href={`/contact?product=${encodeURIComponent(product.name)}`}
+                  class="button-link button-primary rounded-full px-4 py-2 text-sm font-semibold text-white"
+                  style="background:var(--color-primary);"
+                >Buy</a>
+              </div>
+              <span class="sr-only">Placeholder product {productIndex + 1}</span>
+            </div>
+          </article>
+        ))}
+      </div>
+    </details>
+  ))}
+</div>
+
+<script>
+  document.querySelectorAll('[data-category-link]').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      const targetId = link.getAttribute('href')?.slice(1);
+      const target = targetId ? document.getElementById(targetId) : null;
+      if (!(target instanceof HTMLDetailsElement)) return;
+
+      event.preventDefault();
+      target.open = true;
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      history.replaceState(null, '', `#${targetId}`);
+    });
+  });
+
+  const hashTarget = document.getElementById(window.location.hash.slice(1));
+  if (hashTarget instanceof HTMLDetailsElement) hashTarget.open = true;
+
+  const escapeHtml = (value) => String(value ?? '').replace(/[&<>'"]/g, (character) => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;',
+  })[character]);
+  const money = (cents) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(Number(cents || 0) / 100);
+
+  fetch('/api/catalog/products')
+    .then((response) => response.ok ? response.json() : Promise.reject())
+    .then(({ products = [] }) => {
+      document.querySelectorAll('[data-category]').forEach((section) => {
+        const categoryProducts = products.filter((product) => product.category_slug === section.dataset.category);
+        const grid = section.querySelector('[data-product-grid]');
+        if (!grid || !categoryProducts.length) return;
+        grid.innerHTML = categoryProducts.map((product) => `
+          <article class="grid overflow-hidden rounded-[var(--radius-md)] border border-[color:var(--color-secondary)] sm:grid-cols-[10rem_1fr]">
+            <div class="flex min-h-40 items-center justify-center bg-[color:var(--color-surface)]">
+              ${product.image_url ? `<img src="${escapeHtml(product.image_url)}" alt="${escapeHtml(product.name)}" class="h-full min-h-40 w-full object-cover">` : '<span class="flex h-20 w-20 items-center justify-center rounded-full border-4 border-white bg-[color:var(--color-secondary)] text-2xl text-white" aria-hidden="true">✦</span>'}
+            </div>
+            <div class="flex flex-col p-5">
+              <p class="text-xs font-semibold uppercase tracking-wide" style="color:var(--color-accent);">${escapeHtml(product.category)}</p>
+              <h3 class="mt-1 text-lg font-semibold" style="font-family:var(--font-heading);">${escapeHtml(product.name)}</h3>
+              <p class="mt-2 flex-1 text-sm leading-6 text-[color:var(--color-muted)]">${escapeHtml(product.description)}</p>
+              <div class="mt-5 flex items-center justify-between gap-3">
+                <span class="font-semibold" style="color:var(--color-primary-dark);">${money(product.price_cents)}</span>
+                <a href="/contact?product=${encodeURIComponent(product.name)}" class="button-link button-primary rounded-full px-4 py-2 text-sm font-semibold text-white" style="background:var(--color-primary);">Buy</a>
+              </div>
+            </div>
+          </article>
+        `).join('');
+      });
+    })
+    .catch(() => {
+      // The static seed catalog remains visible until Cloudflare bindings are configured.
+    });
+</script>

@@ -1,0 +1,29 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "nadine-kay",
+  "pages_build_output_dir": "dist",
+  "compatibility_date": "2026-09-10",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "nadine-kay",
+      "database_id": "f12185fd-2b2f-4e47-9957-9b0d66d41116"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "MEDIA_BUCKET",
+      "bucket_name": "nadine-kay-product-media"
+    }
+  ],
+  "vars": {
+    "APP_ORIGIN": "https://nadine-kay.pages.dev",
+    "AUTH_SUCCESS_PATH": "/account",
+    "ALLOW_SELF_SIGNUP": "true",
+    "MAGIC_LINK_TTL_MINUTES": "15",
+    "SESSION_TTL_DAYS": "30",
+    "RESEND_FROM_EMAIL": "Nadine Kay <onboarding@resend.dev>",
+    "PUBLIC_MEDIA_BASE_URL": "https://nadine-kay.pages.dev/media",
+    "MAX_MEDIA_BYTES": "10485760"
+  }
+}
