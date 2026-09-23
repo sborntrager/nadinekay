@@ -85,9 +85,9 @@ export default {
     const user = path.match(/^\/api\/admin\/users\/([^/]+)$/);
     try {
       if (request.method === "GET" && path === "/health") return json({ ok: true });
-      if (request.method === "GET" && path === "/api/admin/overview") return overview(request, env);
-      if (request.method === "GET" && path === "/api/admin/users") return listUsers(request, env);
-      if (request.method === "PATCH" && user) return updateUser(request, env, user[1]);
+      if (request.method === "GET" && path === "/api/admin/overview") return await overview(request, env);
+      if (request.method === "GET" && path === "/api/admin/users") return await listUsers(request, env);
+      if (request.method === "PATCH" && user) return await updateUser(request, env, user[1]);
       return json({ error: "Not found" }, 404);
     } catch (error) {
       if (error instanceof HttpError) return json({ error: error.message }, error.status);

@@ -107,16 +107,16 @@ export default {
     try {
       if (request.method === "GET" && path === "/health") return json({ ok: true });
       if (request.method === "GET" && path === "/api/catalog/products") return publicProducts(env);
-      if (request.method === "GET" && path === "/api/catalog/categories") return listCategories(request, env);
-      if (request.method === "GET" && path === "/api/admin/catalog/categories") return listCategories(request, env, true);
-      if (request.method === "POST" && path === "/api/admin/catalog/categories") return createCategory(request, env);
-      if (request.method === "GET" && path === "/api/admin/catalog/products") return listAdminProducts(request, env);
-      if (request.method === "POST" && path === "/api/admin/catalog/products") return createProduct(request, env);
-      if (request.method === "PATCH" && product && !product[2]) return updateProduct(request, env, product[1]);
-      if (request.method === "DELETE" && product && !product[2]) return deleteProduct(request, env, product[1]);
-      if (request.method === "POST" && product?.[2] === "publish") return setStatus(request, env, product[1], "published");
-      if (request.method === "POST" && product?.[2] === "hide") return setStatus(request, env, product[1], "hidden");
-      if (request.method === "POST" && product?.[2] === "assets") return uploadAsset(request, env, product[1]);
+      if (request.method === "GET" && path === "/api/catalog/categories") return await listCategories(request, env);
+      if (request.method === "GET" && path === "/api/admin/catalog/categories") return await listCategories(request, env, true);
+      if (request.method === "POST" && path === "/api/admin/catalog/categories") return await createCategory(request, env);
+      if (request.method === "GET" && path === "/api/admin/catalog/products") return await listAdminProducts(request, env);
+      if (request.method === "POST" && path === "/api/admin/catalog/products") return await createProduct(request, env);
+      if (request.method === "PATCH" && product && !product[2]) return await updateProduct(request, env, product[1]);
+      if (request.method === "DELETE" && product && !product[2]) return await deleteProduct(request, env, product[1]);
+      if (request.method === "POST" && product?.[2] === "publish") return await setStatus(request, env, product[1], "published");
+      if (request.method === "POST" && product?.[2] === "hide") return await setStatus(request, env, product[1], "hidden");
+      if (request.method === "POST" && product?.[2] === "assets") return await uploadAsset(request, env, product[1]);
       return json({ error: "Not found" }, 404);
     } catch (error) {
       if (error instanceof HttpError) return json({ error: error.message }, error.status);

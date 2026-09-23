@@ -96,14 +96,14 @@ export default {
     const order = path.match(/^\/api\/admin\/orders\/([^/]+)$/);
     try {
       if (request.method === "GET" && path === "/health") return json({ ok: true });
-      if (request.method === "POST" && path === "/api/quotes") return submitQuote(request, env);
-      if (request.method === "GET" && path === "/api/admin/quotes") return adminList(request, env);
-      if (request.method === "GET" && path === "/api/admin/orders") return adminOrders(request, env);
-      if (request.method === "PATCH" && order) return updateOrder(request, env, order[1]);
-      if (request.method === "PATCH" && quote && !path.endsWith("/convert")) return updateQuote(request, env, quote[1]);
-      if (request.method === "POST" && quote && path.endsWith("/convert")) return convert(request, env, quote[1]);
-      if (request.method === "GET" && path === "/api/account/quotes") return accountQuotes(request, env);
-      if (request.method === "GET" && path === "/api/account/orders") return accountOrders(request, env);
+      if (request.method === "POST" && path === "/api/quotes") return await submitQuote(request, env);
+      if (request.method === "GET" && path === "/api/admin/quotes") return await adminList(request, env);
+      if (request.method === "GET" && path === "/api/admin/orders") return await adminOrders(request, env);
+      if (request.method === "PATCH" && order) return await updateOrder(request, env, order[1]);
+      if (request.method === "PATCH" && quote && !path.endsWith("/convert")) return await updateQuote(request, env, quote[1]);
+      if (request.method === "POST" && quote && path.endsWith("/convert")) return await convert(request, env, quote[1]);
+      if (request.method === "GET" && path === "/api/account/quotes") return await accountQuotes(request, env);
+      if (request.method === "GET" && path === "/api/account/orders") return await accountOrders(request, env);
       return json({ error: "Not found" }, 404);
     } catch (error) {
       if (error instanceof HttpError) return json({ error: error.message }, error.status);

@@ -144,10 +144,10 @@ export default {
   async fetch(request, env) {
     const path = new URL(request.url).pathname;
     try {
-      if (request.method === "POST" && path === "/api/auth/request-link") return requestLink(request, env);
-      if (request.method === "GET" && path === "/api/auth/verify") return verify(request, env);
-      if (request.method === "GET" && path === "/api/auth/session") return session(request, env);
-      if (request.method === "POST" && path === "/api/auth/logout") return logout(request, env);
+      if (request.method === "POST" && path === "/api/auth/request-link") return await requestLink(request, env);
+      if (request.method === "GET" && path === "/api/auth/verify") return await verify(request, env);
+      if (request.method === "GET" && path === "/api/auth/session") return await session(request, env);
+      if (request.method === "POST" && path === "/api/auth/logout") return await logout(request, env);
       if (request.method === "GET" && path === "/health") {
         const missing = validateConfiguration(env);
         return json({ ok: missing.length === 0, module: "cloudflare-magic-link-auth", missing }, missing.length ? 503 : 200);
