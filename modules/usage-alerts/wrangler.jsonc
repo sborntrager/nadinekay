@@ -1,0 +1,18 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "nadine-kay-usage-alerts",
+  "main": "src/index.js",
+  "compatibility_date": "2026-09-10",
+  "workers_dev": true,
+  "triggers": { "crons": ["0 * * * *"] },
+  "kv_namespaces": [
+    { "binding": "ALERT_STATE", "id": "78265e15bb034deeb5c4cbc980838685" }
+  ],
+  "vars": {
+    "PROJECT_NAME": "Nadine Kay",
+    "CF_ACCOUNT_ID": "ba2052519144551aa0626e4d416e59b7",
+    "ALERT_FROM_EMAIL": "Nadine Kay Alerts <login@nadinekay.com>",
+    "WARN_PERCENT": "80",
+    "CRITICAL_PERCENT": "95"
+  }
+}
